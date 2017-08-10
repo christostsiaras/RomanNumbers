@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RomanNumbers
 {
+    /// <summary>
+    /// Converts an Arabic number to Roman.
+    /// </summary>
     static class Converter
     {
         //The dictionary storing values to translate Arabic numbers to Roman Numbers
@@ -13,12 +16,14 @@ namespace RomanNumbers
         private static readonly int minValue = 1;
         private static readonly int maxValue = 3999;
         private static int itteration = 0;//the number that the recursive algorithm has been executed
+        private static Boolean flag=true;
 
         /// <summary>
-        /// The translator get as input a positive integer up to 3999 and returns the Roman value.
+        /// Initializes the converter dictionary.
         /// </summary>
-        private static void init()
+        private static void Initialize()
         {
+            romanNumbers = new Dictionary<int, String>();
             romanNumbers.Add(1, "I");
             romanNumbers.Add(4, "IV");
             romanNumbers.Add(5, "V");
@@ -40,14 +45,30 @@ namespace RomanNumbers
         /// </summary>
         public static String Arabic2Roman(int value)
         {
-            //Check if the init method has been already trigerred.
-            Console.WriteLine(itteration);
-            if (itteration==0)
+            String output = "";
+            //Split the number into thousants.  hundrets, etc
+            int i = 10;
+            while (value>i/10)
             {
-                romanNumbers= new Dictionary<int, String>();
-                init();
+                output=(" "+Convert(value%i-value%(i/10)))+output;
+                i *= 10;
             }
-            itteration++;
+            //Remove the first space of the output
+            output = output.Substring(1);
+            return output;
+        }
+
+        /// <summary>
+        /// The method converts an Arabic number to Roman.
+        /// <param name="value">The Arabic number value to convert</param> 
+        /// </summary>
+        private static String Convert(int value)
+        {
+            //Check if the Initialize method has been already trigerred.
+            if (flag)
+            {
+                Initialize();
+            }
 
             if (value >= minValue && value <= maxValue)
             {
@@ -58,14 +79,20 @@ namespace RomanNumbers
                 {
                     if (value.ToString().Length==1)//if this is the last itteration
                     {
-                        itteration = 0;
+                        flag=false;
                     }
                     return romanNumbers[value];
                 }
 
-                return romanNumbers[flooredKeyValue] + Arabic2Roman(value - flooredKeyValue);
+                return romanNumbers[flooredKeyValue] + Convert(value - flooredKeyValue);
             }
             return null;//return null if the value is greater than 3000 or less than 0
         }
+
+        private static void Clear()
+        {
+            itteration = 0;
+        }
+
     }
 }
