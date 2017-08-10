@@ -67,6 +67,12 @@ namespace RomanNumbers
         /// </summary>
         private static String Convert(int value)
         {
+            if (value==0)
+            {
+                return "";
+            }
+            else
+            {
                 int flooredKeyValue = romanNumbers.Keys.Where<int>(key => key <= value).ToArray<int>().Max();
 
                 //Use recursion to calculate the Roman number
@@ -75,6 +81,7 @@ namespace RomanNumbers
                     return romanNumbers[value];
                 }
                 return romanNumbers[flooredKeyValue] + Convert(value - flooredKeyValue);
+            }      
         }
 
     }
