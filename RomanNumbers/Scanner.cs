@@ -21,7 +21,7 @@ namespace RomanNumbers
         /// as well as the total number of numbers replaced.
         /// <param name="input">The text with the Arabic number value to convert</param> 
         /// </summary>
-        public static String ReplaceNumbers(String input)
+        public static Result ReplaceNumbers(String input)
         {
             String output = input;
             //get the collection of matches
@@ -47,7 +47,11 @@ namespace RomanNumbers
                 output = builder.ToString();
                 output =output.Replace(match.ToString(),Converter.Arabic2Roman(Int32.Parse(match.ToString())));
             }
-            return output + "\n"+matchesArray.Length.ToString()+" integers have been replaced.";
+            //Result result = new Result();
+            Result result = new Result() ;
+            result.Text = output;
+            result.Results=matchesArray.Length;
+            return result;
         }
     }
 }

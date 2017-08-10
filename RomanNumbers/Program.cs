@@ -16,9 +16,9 @@ namespace RomanNumbers
             Console.WriteLine(Converter.Arabic2Roman(testValue));
             Console.WriteLine(Converter.Arabic2Roman(failValue));
 
-            string test = "Eleven 11 and hundret eleven 111.";
+            string test = "1, 7, 1367, Eleven 11 and hundret eleven 111.";
             Console.WriteLine(test);
-            Console.WriteLine(Scanner.ReplaceNumbers(test));
+            Console.WriteLine(Scanner.ReplaceNumbers(test).ToString());
 
             Console.ReadLine();
 
