@@ -9,7 +9,7 @@ namespace RomanNumbers
     /// <summary>
     /// Converts an Arabic number to Roman.
     /// </summary>
-    static class Converter
+    public static class Converter
     {
         //The dictionary storing values to translate Arabic numbers to Roman Numbers
         private static Dictionary<int, String> romanNumbers = null;

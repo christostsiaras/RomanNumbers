@@ -11,7 +11,7 @@ namespace RomanNumbers
         static void Main(string[] args)
         {
             int testValue = 1;
-            int failValue = 0;
+            int failValue = -10;
             //int failValue = 4000;
             Console.WriteLine(Converter.Arabic2Roman(testValue));
             Console.WriteLine(Converter.Arabic2Roman(failValue));
