@@ -39,7 +39,8 @@ namespace RomanNumbers
             /*replace first the last match to avoid changing input's string length that will
             break the string when replacing matches.
             Non expected values e.g., numbers out of limmits will be ignored and not converted
-            as well as will not be counted.*/
+            as well as will not be counted.
+            Finally some addtional spaced might occure in case of replacing some numbers e.g., 10 with X.*/
             int invalidCounter = 0;
             for (int i=matchesArray.Length-1; i>=0 ;--i)
             {
