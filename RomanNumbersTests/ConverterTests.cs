@@ -34,9 +34,13 @@ namespace RomanNumbers.Tests
             Assert.AreEqual(Converter.Arabic2Roman(3999).Replace(" ", String.Empty), "MMMCMXCIX");
             Assert.AreNotEqual(Converter.Arabic2Roman(3999), "MMMCMXCIX");
 
-            Assert.IsNull(Converter.Arabic2Roman(0));
-            Assert.IsNull(Converter.Arabic2Roman(-1));
-            Assert.IsNull(Converter.Arabic2Roman(4000));
+            Assert.AreEqual(Converter.Arabic2Roman(0),"0");
+            Assert.AreEqual(Converter.Arabic2Roman(-1),"-1");
+            Assert.AreEqual(Converter.Arabic2Roman(4000),"4000");
+
+            Assert.IsFalse(Converter.isValidEntry(0));
+            Assert.IsFalse(Converter.isValidEntry(-1));
+            Assert.IsFalse(Converter.isValidEntry(4000));
         }
     }
 }

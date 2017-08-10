@@ -43,7 +43,7 @@ namespace RomanNumbers
         /// </summary>
         public static String Arabic2Roman(int value)
         {
-            if (value >= minValue && value <= maxValue)
+            if (isValidEntry(value))
             {
                 Initialize();
                 String output = "";
@@ -61,7 +61,17 @@ namespace RomanNumbers
                 }
                 return output;
             }
-            return null;
+            return value.ToString();
+        }
+
+        public static Boolean isValidEntry(int input)
+        {
+            Boolean value= false;
+            if (input >= minValue && input <= maxValue)
+            {
+                value = true;
+            }
+            return value;
         }
 
         /// <summary>

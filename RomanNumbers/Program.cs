@@ -16,9 +16,12 @@ namespace RomanNumbers
             Console.WriteLine(Converter.Arabic2Roman(testValue));
             Console.WriteLine(Converter.Arabic2Roman(failValue));
 
-            string test = "1, 7, 1367, Eleven 11 and hundret eleven 111.";
+            String test = "1,10,5000,-1";
             Console.WriteLine(test);
             Console.WriteLine(Scanner.ReplaceNumbers(test).ToString());
+
+            Result result = Scanner.ReplaceNumbers(test);
+            Console.WriteLine(result.Text.Equals("I,X ,5000,-I"));
 
             Console.ReadLine();
 
