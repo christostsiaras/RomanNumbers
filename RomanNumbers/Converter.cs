@@ -49,13 +49,16 @@ namespace RomanNumbers
                 String output = "";
                 //Split the number into thousants.  hundrets, etc
                 int i = 10;
-                while (value > i / 10)
+                while (value >= i / 10)
                 {
                     output = (" " + Convert(value % i - value % (i / 10))) + output;
                     i *= 10;
                 }
-                //Remove the first space of the output
-                output = output.Substring(1);
+                //Remove the first space of the output if it is larger in length than 1
+                if (output.Length>1)
+                {
+                    output = output.Substring(1);
+                }
                 return output;
             }
             return null;
