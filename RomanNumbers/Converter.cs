@@ -8,10 +8,14 @@ namespace RomanNumbers
 {
     class Converter
     {
+        //The dictionary storing values to translate Arabic numbers to Roman Numbers
         private Dictionary<int, String> romanNumbers = new Dictionary<int, String>();
         private readonly int minValue = 1;
         private readonly int maxValue = 3999;
 
+        /// <summary>
+        /// The translator get as input a positive integer up to 3999 and returns the Roman value.
+        /// </summary>
         public Converter()
         {
             romanNumbers.Add(1, "I");
@@ -29,23 +33,16 @@ namespace RomanNumbers
             romanNumbers.Add(1000, "M");
         }
 
+        /// <summary>
+        /// The method converts an Arabic number to Roman.
+        /// <param name="value">The Arabic number value to convert</param> 
+        /// </summary>
         public String Arabic2Roman(int value)
         {
             if (value >= minValue && value <= maxValue)
             {
                 int[] keys = romanNumbers.Keys.ToArray<int>();
-                int flooredKeyValue = 0;
-                foreach (int key in keys)
-                {
-                    if (key <= value)
-                    {
-                        flooredKeyValue = key;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+                int flooredKeyValue = romanNumbers.Keys.Where<int>(key => key <= value).ToArray<int>().Max();
 
                 //Use recursion to calculate the Roman number
                 if (value == flooredKeyValue)
@@ -54,7 +51,7 @@ namespace RomanNumbers
                 }
                 return romanNumbers[flooredKeyValue] + Arabic2Roman(value - flooredKeyValue);
             }
-            return null;
+            return null;//return null if the value is greater than 3000 or less than 0
         }
     }
 }
