@@ -10,10 +10,9 @@ namespace RomanNumbers
     {
         static void Main(string[] args)
         {
-            //Converter converter = new Converter();
             int testValue = 888;
-            //int failValue = 0;
-            int failValue = 3999;
+            int failValue = 0;
+            //int failValue = 4000;
             Console.WriteLine(Converter.Arabic2Roman(testValue));
             Console.WriteLine(Converter.Arabic2Roman(failValue));
             Console.ReadLine();

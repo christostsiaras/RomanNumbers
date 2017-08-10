@@ -15,8 +15,6 @@ namespace RomanNumbers
         private static Dictionary<int, String> romanNumbers = null;
         private static readonly int minValue = 1;
         private static readonly int maxValue = 3999;
-        private static int itteration = 0;//the number that the recursive algorithm has been executed
-        private static Boolean flag=true;
 
         /// <summary>
         /// Initializes the converter dictionary.
@@ -45,17 +43,22 @@ namespace RomanNumbers
         /// </summary>
         public static String Arabic2Roman(int value)
         {
-            String output = "";
-            //Split the number into thousants.  hundrets, etc
-            int i = 10;
-            while (value>i/10)
+            if (value >= minValue && value <= maxValue)
             {
-                output=(" "+Convert(value%i-value%(i/10)))+output;
-                i *= 10;
+                Initialize();
+                String output = "";
+                //Split the number into thousants.  hundrets, etc
+                int i = 10;
+                while (value > i / 10)
+                {
+                    output = (" " + Convert(value % i - value % (i / 10))) + output;
+                    i *= 10;
+                }
+                //Remove the first space of the output
+                output = output.Substring(1);
+                return output;
             }
-            //Remove the first space of the output
-            output = output.Substring(1);
-            return output;
+            return null;
         }
 
         /// <summary>
@@ -64,34 +67,14 @@ namespace RomanNumbers
         /// </summary>
         private static String Convert(int value)
         {
-            //Check if the Initialize method has been already trigerred.
-            if (flag)
-            {
-                Initialize();
-            }
-
-            if (value >= minValue && value <= maxValue)
-            {
                 int flooredKeyValue = romanNumbers.Keys.Where<int>(key => key <= value).ToArray<int>().Max();
 
                 //Use recursion to calculate the Roman number
                 if (value == flooredKeyValue)
                 {
-                    if (value.ToString().Length==1)//if this is the last itteration
-                    {
-                        flag=false;
-                    }
                     return romanNumbers[value];
                 }
-
                 return romanNumbers[flooredKeyValue] + Convert(value - flooredKeyValue);
-            }
-            return null;//return null if the value is greater than 3000 or less than 0
-        }
-
-        private static void Clear()
-        {
-            itteration = 0;
         }
 
     }
