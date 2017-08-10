@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace RomanNumbers
 {
-    class Converter
+    static class Converter
     {
         //The dictionary storing values to translate Arabic numbers to Roman Numbers
-        private Dictionary<int, String> romanNumbers = new Dictionary<int, String>();
-        private readonly int minValue = 1;
-        private readonly int maxValue = 3999;
+        private static Dictionary<int, String> romanNumbers = null;
+        private static readonly int minValue = 1;
+        private static readonly int maxValue = 3999;
+        private static int itteration = 0;//the number that the recursive algorithm has been executed
 
         /// <summary>
         /// The translator get as input a positive integer up to 3999 and returns the Roman value.
         /// </summary>
-        public Converter()
+        private static void init()
         {
             romanNumbers.Add(1, "I");
             romanNumbers.Add(4, "IV");
@@ -37,8 +38,17 @@ namespace RomanNumbers
         /// The method converts an Arabic number to Roman.
         /// <param name="value">The Arabic number value to convert</param> 
         /// </summary>
-        public String Arabic2Roman(int value)
+        public static String Arabic2Roman(int value)
         {
+            //Check if the init method has been already trigerred.
+            Console.WriteLine(itteration);
+            if (itteration==0)
+            {
+                romanNumbers= new Dictionary<int, String>();
+                init();
+            }
+            itteration++;
+
             if (value >= minValue && value <= maxValue)
             {
                 int flooredKeyValue = romanNumbers.Keys.Where<int>(key => key <= value).ToArray<int>().Max();
@@ -46,17 +56,14 @@ namespace RomanNumbers
                 //Use recursion to calculate the Roman number
                 if (value == flooredKeyValue)
                 {
+                    if (value.ToString().Length==1)//if this is the last itteration
+                    {
+                        itteration = 0;
+                    }
                     return romanNumbers[value];
                 }
 
-                //if more than one digit in the Arabic number then add space between Roman "digits"
-                String space = "";
-                if (value.ToString().Length > 1)
-                {
-                    space = " ";
-                }
-
-                return romanNumbers[flooredKeyValue] +space+ Arabic2Roman(value - flooredKeyValue);
+                return romanNumbers[flooredKeyValue] + Arabic2Roman(value - flooredKeyValue);
             }
             return null;//return null if the value is greater than 3000 or less than 0
         }
