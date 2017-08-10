@@ -41,7 +41,6 @@ namespace RomanNumbers
         {
             if (value >= minValue && value <= maxValue)
             {
-                int[] keys = romanNumbers.Keys.ToArray<int>();
                 int flooredKeyValue = romanNumbers.Keys.Where<int>(key => key <= value).ToArray<int>().Max();
 
                 //Use recursion to calculate the Roman number
@@ -49,7 +48,15 @@ namespace RomanNumbers
                 {
                     return romanNumbers[value];
                 }
-                return romanNumbers[flooredKeyValue] + Arabic2Roman(value - flooredKeyValue);
+
+                //if more than one digit in the Arabic number then add space between Roman "digits"
+                String space = "";
+                if (value.ToString().Length > 1)
+                {
+                    space = " ";
+                }
+
+                return romanNumbers[flooredKeyValue] +space+ Arabic2Roman(value - flooredKeyValue);
             }
             return null;//return null if the value is greater than 3000 or less than 0
         }
