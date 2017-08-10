@@ -22,7 +22,6 @@ namespace RomanNumbers
 
             Console.ReadLine();
 
-
         }
     }
 }
